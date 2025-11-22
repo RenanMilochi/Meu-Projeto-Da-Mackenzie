@@ -1,0 +1,30 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v3
+
+    - name: Validar arquivos HTML
+      run: |
+        if grep -q "<html" ./site/index.html; then
+          echo "HTML válido!"
+        else
+          echo "HTML inválido!"
+          exit 1
+        fi
+
+    - name: Gerar artefato
+      uses: actions/upload-artifact@v3
+      with:
+        name: site
+        path: site/
