@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout do repositório
+      uses: actions/checkout@v3
+
+    - name: Configurar Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Instalar dependências (se houver)
+      run: |
+        echo "Não há dependências ainda."
+
+    - name: Rodar testes simples
+      run: |
+        echo "Aqui você poderia rodar testes unitários ou validar HTML/CSS"
